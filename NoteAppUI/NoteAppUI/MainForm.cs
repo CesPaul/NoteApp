@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NoteApp;
 
 namespace NoteAppUI
 {
@@ -16,6 +8,13 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
+
+        }
+
+        private void AddNoteButton_Click(object sender, EventArgs e)
+        {
+            Form addAndEditNoteForm = new AddAndEditNoteForm();
+            addAndEditNoteForm.Show();
         }
     }
 }

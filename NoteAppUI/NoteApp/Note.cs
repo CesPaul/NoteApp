@@ -122,6 +122,7 @@ namespace NoteApp
         {
             Name = name;
             Content = content;
+            Category = category;
             DateOfLastEdit = DateTime.Now;
         }
 
