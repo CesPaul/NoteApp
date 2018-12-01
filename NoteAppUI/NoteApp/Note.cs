@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using DateTime = System.DateTime;
 
 namespace NoteApp
@@ -12,7 +7,7 @@ namespace NoteApp
     /// <summary>
     /// Класс, представляющий заметку
     /// </summary>
-    public class Note : ICloneable
+    public class Note : ICloneable<Note>
     {
         private string _name;
 
@@ -102,9 +97,11 @@ namespace NoteApp
             DateOfLastEdit = DateTime.Now;
         }
 
-        public object Clone()
+        public Note Clone()
         {
-            return this.MemberwiseClone();
+            // Категория преобразовывается в int, int преобразовывается в NoteCategory.
+            // При этом происходит создание нового объекта типа NoteCategory.
+            return new Note(Name, Content, (NoteCategory)((int)Category));
         }
     }
 }

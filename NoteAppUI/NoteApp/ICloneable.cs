@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NoteApp
+﻿namespace NoteApp
 {
-    interface ICloneable
+    // TODO повторить шаблоны.
+    interface ICloneable<T>
     {
-        object Clone();
+        T Clone();
     }
 }
