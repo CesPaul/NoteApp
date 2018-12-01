@@ -45,7 +45,7 @@
     <Compile Include="Note.cs" />
     <Compile Include="NoteCategory.cs" />
     <Compile Include="ProjectData.cs" />
-    <Compile Include="ProjectManager.cs" />
+    <Compile Include="ProjectDataManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public static class ProjectManager
+    public static class ProjectDataManager
     {
         private static readonly string _pathToFile = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp\\NoteApp.notes";
     }

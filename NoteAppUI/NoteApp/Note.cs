@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace NoteApp
 
         private NoteCategory _category;
 
-        private DateTime _dateOfCreation;
+        private readonly DateTime _dateOfCreation;
 
         private DateTime _dateOfLastEdit;
 
@@ -28,6 +29,7 @@ namespace NoteApp
             get { return _name; }
             set
             {
+                // TODO Добавить символ пробел в паттерн.
                 string pattern = @"^[a-zA-Z0-9_-]*$";
 
                 if (value == null)
@@ -35,28 +37,21 @@ namespace NoteApp
                     throw new ArgumentException("Name value is instance of null type");
                 }
 
+                value = value.Trim();
                 if (value.Length == 0)
                 {
-                    throw new ArgumentException("Name length is 0 symbols");
+                    _name = "Noname";
+                    return;
                 }
-
-                else if (value.Length != 0 && value.Length > 70)
+                if (value.Length > 50)
                 {
-                    throw new ArgumentException("Name length is more than 70 symbols");
+                    throw new ArgumentException("Name length is more than 50 symbols");
                 }
-                else if (value[0].ToString() == " ")
-                {
-                    throw new ArgumentException("Name value starts with space symbol");
-                }
-                else if (!Regex.IsMatch(value, pattern))
+                if (!Regex.IsMatch(value, pattern))
                 {
                     throw new ArgumentException("Name value contains special symbols");
                 }
-
-                else
-                {
-                    _name = value;
-                }
+                 _name = value;
             }
         }
 
@@ -100,7 +95,6 @@ namespace NoteApp
         public DateTime DateOfCreation
         {
             get { return _dateOfCreation; }
-            set { _dateOfCreation = value; }
         }
 
         public DateTime DateOfLastEdit
@@ -114,7 +108,7 @@ namespace NoteApp
             Name = name;
             Content = content;
             Category = category;
-            DateOfCreation = DateTime.Now;
+            _dateOfCreation = DateTime.Now;
             DateOfLastEdit = DateTime.Now;
         }
 
