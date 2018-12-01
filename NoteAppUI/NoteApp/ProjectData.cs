@@ -7,13 +7,13 @@ using NoteApp;
 
 namespace NoteApp
 {
-    public class Project
+    public class ProjectData
     {
         private List<Note> _notesCollection = new List<Note>();
 
         private string _filename;
 
-        public Project(string filename)
+        public ProjectData(string filename)
         {
             filename = filename;
         }

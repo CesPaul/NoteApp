@@ -8,6 +8,6 @@ namespace NoteApp
 {
     public static class ProjectManager
     {
-        private static readonly string _pathToFile = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp\\NoteAppe.notes";
+        private static readonly string _pathToFile = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp\\NoteApp.notes";
     }
 }

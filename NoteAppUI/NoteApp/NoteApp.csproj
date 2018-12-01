@@ -44,7 +44,7 @@
     <Compile Include="ICloneable.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="NoteCategory.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="ProjectData.cs" />
     <Compile Include="ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
