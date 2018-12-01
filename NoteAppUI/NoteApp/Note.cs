@@ -64,25 +64,7 @@ namespace NoteApp
                 {
                     throw new ArgumentException("Content value is instance of null type");
                 }
-
-                if (value.Length == 0)
-                {
-                    throw new ArgumentException("Content value is zero symbols");
-                }
-
-                else if (value.Length != 0 && value.Length > 4096)
-                {
-                    throw new ArgumentException("Content lenth is more than 4096 symbols");
-                }
-
-                else if (value[0].ToString() == " ")
-                {
-                    throw new ArgumentException("Content value is starts with space symbol");
-                }
-                else
-                {
-                    _content = value;
-                }
+                _content = value.Trim();
             }
         }
 
