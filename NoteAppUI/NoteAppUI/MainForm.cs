@@ -8,7 +8,7 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
-
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
         }
 
         private void AddNoteButton_Click(object sender, EventArgs e)

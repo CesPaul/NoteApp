@@ -9,6 +9,7 @@ namespace NoteAppUI
         public AddAndEditNoteForm()
         {
             InitializeComponent();
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -22,6 +23,11 @@ namespace NoteAppUI
             Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
             Note note = new Note(name, content, noteCategory);
 
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }

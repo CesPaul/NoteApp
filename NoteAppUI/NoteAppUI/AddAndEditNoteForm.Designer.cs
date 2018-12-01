@@ -64,7 +64,7 @@ namespace NoteAppUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 65);
+            this.label3.Location = new System.Drawing.Point(12, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 2;
@@ -79,12 +79,12 @@ namespace NoteAppUI
             // 
             // CategoryComboBox
             // 
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(70, 32);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(139, 21);
             this.CategoryComboBox.TabIndex = 4;
-            this.CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
             // 
             // CreatedDateTimePicker
             // 
@@ -105,7 +105,7 @@ namespace NoteAppUI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 65);
+            this.label4.Location = new System.Drawing.Point(230, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 7;
@@ -137,6 +137,7 @@ namespace NoteAppUI
             this.CancelButton.TabIndex = 10;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // AddAndEditNoteForm
             // 
