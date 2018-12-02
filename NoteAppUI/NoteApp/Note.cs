@@ -9,6 +9,9 @@ namespace NoteApp
     /// </summary>
     public class Note : ICloneable<Note>
     {
+        // Уникальный идентификатор записи.
+        private readonly Guid _id = new Guid();
+
         private string _name;
 
         private string _content;
@@ -18,6 +21,8 @@ namespace NoteApp
         private readonly DateTime _dateOfCreation;
 
         private DateTime _dateOfLastEdit;
+
+        public Guid Id => _id;
 
         public string Name
         {
