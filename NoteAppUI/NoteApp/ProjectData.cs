@@ -7,6 +7,9 @@ using NoteApp;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Класс, который хранит словарь всех созданных заметок.
+    /// </summary>
     public class ProjectData
     {
         private List<Note> _notesCollection = new List<Note>();

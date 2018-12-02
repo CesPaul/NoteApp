@@ -5,7 +5,7 @@ using DateTime = System.DateTime;
 namespace NoteApp
 {
     /// <summary>
-    /// Класс, представляющий заметку
+    /// Класс, представляющий заметку.
     /// </summary>
     public class Note : ICloneable<Note>
     {
@@ -29,8 +29,7 @@ namespace NoteApp
             get { return _name; }
             set
             {
-                // TODO Добавить символ пробел в паттерн.
-                string pattern = @"^[a-zA-Z0-9_-]*$";
+                string pattern = @"^[_-0-9A-Za-z ]*$";
 
                 if (value == null)
                 {
@@ -85,6 +84,12 @@ namespace NoteApp
             set { _dateOfLastEdit = value; }
         }
 
+        /// <summary>
+        /// Конструктор, который устанавливает значения полей заметки.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
+        /// <param name="category"></param>
         public Note(string name, string content, NoteCategory category)
         {
             Name = name;
@@ -94,6 +99,12 @@ namespace NoteApp
             DateOfLastEdit = DateTime.Now;
         }
 
+        /// <summary>
+        /// Метод для редактирования заметки.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
+        /// <param name="category"></param>
         public void Edit(string name, string content, NoteCategory category)
         {
             Name = name;

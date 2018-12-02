@@ -18,7 +18,7 @@ namespace NoteAppUI
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
             Form addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.Show();
+            addAndEditNoteForm.ShowDialog();
         }
 
         private void EditNoteButton_Click(object sender, EventArgs e)
