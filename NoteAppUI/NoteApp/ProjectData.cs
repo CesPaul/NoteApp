@@ -12,7 +12,7 @@ namespace NoteApp
     /// </summary>
     public class ProjectData
     {
-        private List<Note> _notesCollection = new List<Note>();
+        private List<Note> _notes = new List<Note>();
 
         private string _filename;
 
@@ -41,9 +41,9 @@ namespace NoteApp
             }
         }
 
-        public List<Note> NotesCollection
+        public List<Note> Notes
         {
-            get { return _notesCollection; }
+            get { return _notes; }
         }
     }
 }

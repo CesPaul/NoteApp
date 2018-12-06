@@ -30,6 +30,7 @@ namespace NoteAppUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAndEditNoteForm));
             this.TitleLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -157,6 +158,7 @@ namespace NoteAppUI
             this.Controls.Add(this.CategoryLabel);
             this.Controls.Add(this.TitleLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddAndEditNoteForm";
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);

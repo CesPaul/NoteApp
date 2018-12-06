@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,7 @@
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.ShowCategoryLabel = new System.Windows.Forms.Label();
             this.NotesListBox = new System.Windows.Forms.ListBox();
+            this.NoteNameLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.ModifiedTextBox = new System.Windows.Forms.TextBox();
             this.CreatedTextBox = new System.Windows.Forms.TextBox();
@@ -81,7 +83,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -98,7 +100,7 @@
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addNoteToolStripMenuItem.Text = "Add Note";
             this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.addNoteToolStripMenuItem_Click);
             // 
@@ -125,7 +127,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -147,6 +149,7 @@
             // 
             // MainSplitContainer.Panel2
             // 
+            this.MainSplitContainer.Panel2.Controls.Add(this.NoteNameLabel);
             this.MainSplitContainer.Panel2.Controls.Add(this.CategoryLabel);
             this.MainSplitContainer.Panel2.Controls.Add(this.ModifiedTextBox);
             this.MainSplitContainer.Panel2.Controls.Add(this.CreatedTextBox);
@@ -213,10 +216,20 @@
             this.NotesListBox.Size = new System.Drawing.Size(238, 433);
             this.NotesListBox.TabIndex = 0;
             // 
+            // NoteNameLabel
+            // 
+            this.NoteNameLabel.AutoSize = true;
+            this.NoteNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NoteNameLabel.Location = new System.Drawing.Point(9, 9);
+            this.NoteNameLabel.Name = "NoteNameLabel";
+            this.NoteNameLabel.Size = new System.Drawing.Size(88, 17);
+            this.NoteNameLabel.TabIndex = 7;
+            this.NoteNameLabel.Text = "Note Name";
+            // 
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(77, 12);
+            this.CategoryLabel.Location = new System.Drawing.Point(77, 40);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(48, 13);
             this.CategoryLabel.TabIndex = 6;
@@ -224,14 +237,14 @@
             // 
             // ModifiedTextBox
             // 
-            this.ModifiedTextBox.Location = new System.Drawing.Point(283, 37);
+            this.ModifiedTextBox.Location = new System.Drawing.Point(322, 66);
             this.ModifiedTextBox.Name = "ModifiedTextBox";
             this.ModifiedTextBox.Size = new System.Drawing.Size(100, 20);
             this.ModifiedTextBox.TabIndex = 5;
             // 
             // CreatedTextBox
             // 
-            this.CreatedTextBox.Location = new System.Drawing.Point(80, 37);
+            this.CreatedTextBox.Location = new System.Drawing.Point(80, 66);
             this.CreatedTextBox.Name = "CreatedTextBox";
             this.CreatedTextBox.Size = new System.Drawing.Size(100, 20);
             this.CreatedTextBox.TabIndex = 4;
@@ -239,7 +252,7 @@
             // ModifiedLabel
             // 
             this.ModifiedLabel.AutoSize = true;
-            this.ModifiedLabel.Location = new System.Drawing.Point(212, 40);
+            this.ModifiedLabel.Location = new System.Drawing.Point(244, 69);
             this.ModifiedLabel.Name = "ModifiedLabel";
             this.ModifiedLabel.Size = new System.Drawing.Size(47, 13);
             this.ModifiedLabel.TabIndex = 3;
@@ -248,7 +261,7 @@
             // CreatedLabel
             // 
             this.CreatedLabel.AutoSize = true;
-            this.CreatedLabel.Location = new System.Drawing.Point(9, 40);
+            this.CreatedLabel.Location = new System.Drawing.Point(9, 69);
             this.CreatedLabel.Name = "CreatedLabel";
             this.CreatedLabel.Size = new System.Drawing.Size(44, 13);
             this.CreatedLabel.TabIndex = 2;
@@ -257,7 +270,7 @@
             // StaticCategoryLabel
             // 
             this.StaticCategoryLabel.AutoSize = true;
-            this.StaticCategoryLabel.Location = new System.Drawing.Point(9, 12);
+            this.StaticCategoryLabel.Location = new System.Drawing.Point(9, 40);
             this.StaticCategoryLabel.Name = "StaticCategoryLabel";
             this.StaticCategoryLabel.Size = new System.Drawing.Size(49, 13);
             this.StaticCategoryLabel.TabIndex = 1;
@@ -270,10 +283,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContentTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.ContentTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.ContentTextBox.Location = new System.Drawing.Point(12, 63);
+            this.ContentTextBox.Location = new System.Drawing.Point(12, 92);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
-            this.ContentTextBox.Size = new System.Drawing.Size(410, 443);
+            this.ContentTextBox.Size = new System.Drawing.Size(410, 414);
             this.ContentTextBox.TabIndex = 0;
             // 
             // MainForm
@@ -284,6 +297,7 @@
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "NoteApp";
@@ -315,7 +329,6 @@
         private System.Windows.Forms.SplitContainer MainSplitContainer;
         private System.Windows.Forms.Button RemoveNoteButton;
         private System.Windows.Forms.Button EditNoteButton;
-        private System.Windows.Forms.Button AddNoteButton;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label ShowCategoryLabel;
         private System.Windows.Forms.ListBox NotesListBox;
@@ -326,6 +339,8 @@
         private System.Windows.Forms.Label CreatedLabel;
         private System.Windows.Forms.Label StaticCategoryLabel;
         private System.Windows.Forms.TextBox ContentTextBox;
+        private System.Windows.Forms.Label NoteNameLabel;
+        private System.Windows.Forms.Button AddNoteButton;
     }
 }
 
