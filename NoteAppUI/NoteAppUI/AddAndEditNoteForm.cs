@@ -9,30 +9,40 @@ namespace NoteAppUI
         // Если true - форма открыта для редактирования записи.
         // Если false - форма открыта для добавления записи.
         private readonly Boolean _isEdit;
+
         // Редактируемая запись. Если форма открыта на добавление, то null.
         private readonly Note _editNote;
+
+        private Note _currentNote;
+        private NoteCategory _currentCategory;
+
+        public NoteCategory CurrentCategory { get => _currentCategory; set => _currentCategory = value; }
+
+        public Note CurrentNote
+        {
+            get { return _currentNote; }
+            set { _currentNote = value; }
+        }
 
         public AddAndEditNoteForm()
         {
             InitializeComponent();
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
-            _isEdit = false;
+            // _isEdit = false;
         }
 
-        public AddAndEditNoteForm(Note editNote) : this()
+        public void AddNote()
         {
-            TitleTextBox.Text = editNote.Name;
-            ContentTextBox.Text = editNote.Content;
-            CategoryComboBox.SelectedIndex = (int) editNote.Category;
-            _isEdit = true;
-            _editNote = editNote;
+            TitleTextBox.Text = "Note";
+            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+            CreatedDateTimePicker.Value = DateTime.Now;
+            ModifiedDateTimePicker.Value = DateTime.Now;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (_isEdit)
-            {
-                if (_editNote == null)
+            /*if (_isEdit)
+            {*/
+                /*if (_editNote == null)
                 {
                     throw new ArgumentException("Note is null in edit mode.");
                 }
@@ -42,24 +52,29 @@ namespace NoteAppUI
                 // Парсим с комбобокса выбранную пользователем категорию.
                 // Если не спарсил - то поставит дефолтное значение NoteCategory.
                 Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
-                _editNote.Category = noteCategory;
-            } else
-            {
-                string name = TitleTextBox.Text;
-                string content = ContentTextBox.Text;
+                _editNote.Category = noteCategory;*/
+            /*}
+            else
+            {*/
                 NoteCategory noteCategory = NoteCategory.Other;
-
+                
                 // Парсим с комбобокса выбранную пользователем категорию.
                 // Если не спарсил - то поставит дефолтное значение NoteCategory.
                 Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
-                Note note = new Note(name, content, noteCategory);
-            }
-            Close();
+                CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, NoteCategory.Other);
+            /*}*/
+            this.DialogResult = DialogResult.OK;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult result = MessageBox.Show("Do you want to exit without saving?", "NoteApp",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
         }
     }
 }

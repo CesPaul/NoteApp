@@ -7,10 +7,10 @@ namespace NoteApp
     /// <summary>
     /// Класс, представляющий заметку.
     /// </summary>
-    public class Note : ICloneable<Note>
+    public class Note : ICloneable
     {
         // Уникальный идентификатор записи.
-        private readonly Guid _id = new Guid();
+        //private readonly Guid _id = new Guid();
 
         private string _name;
 
@@ -22,14 +22,12 @@ namespace NoteApp
 
         private DateTime _dateOfLastEdit;
 
-        public Guid Id => _id;
-
         public string Name
         {
             get { return _name; }
             set
             {
-                string pattern = @"^[_-0-9A-Za-z ]*$";
+                string pattern = @"^[\w*\s-0-9]*$";
 
                 if (value == null)
                 {
@@ -113,11 +111,14 @@ namespace NoteApp
             DateOfLastEdit = DateTime.Now;
         }
 
-        public Note Clone()
-        {
+        
             // Категория преобразовывается в int, int преобразовывается в NoteCategory.
             // При этом происходит создание нового объекта типа NoteCategory.
-            return new Note(Name, Content, (NoteCategory)((int)Category));
+            // return new Note(Name, Content, (NoteCategory)((int)Category));
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

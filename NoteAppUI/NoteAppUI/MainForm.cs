@@ -10,7 +10,7 @@ namespace NoteAppUI
         /// <summary>
         /// Хранит экземпляр текущего проекта.
         /// </summary>
-        private ProjectData _currentProject;
+        private ProjectData _currentProjectData;
 
         /// <summary>
         /// Хранит номер текущей заметки.
@@ -19,12 +19,17 @@ namespace NoteAppUI
 
         public int NoteId { get; set; }
 
-        public ProjectData CurrentProjectData { get; set; }
+        public ProjectData CurrentProjectData
+        {
+            get { return _currentProjectData; }
+            set { _currentProjectData = value; }
+        }
 
         public MainForm()
         {
             InitializeComponent();
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+
             // Пытаемся загрузить данные из файла. Если нет - создаём новый файл.
             try
             {
@@ -33,8 +38,7 @@ namespace NoteAppUI
             // Создаём директорию храниения файла при её отсутствии.
             catch (DirectoryNotFoundException)
             {
-                if (Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                     "\\NoteApp") == false)
+                if (Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp") == false)
                 {
                     Directory.CreateDirectory(
                         System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp");
@@ -54,12 +58,13 @@ namespace NoteAppUI
 
                 CurrentProjectData = new ProjectData("ProjectData");
             }
+
             // Подгрузка данных в ListBox.
             /*NotesListBox.DataSource = CurrentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";*/
 
-            // Чистим поля.
-           //ClearFields();
+             // Чистим поля.
+             //ClearFields();
         }
 
         private void UpdateNotesList()
@@ -68,24 +73,31 @@ namespace NoteAppUI
             CurrentProjectData = ProjectDataManager.LoadFromFile("ProjectData");
 
             // Обновляем данные коллекции
-            NotesListBox.DataSource = null;
+            /*NotesListBox.DataSource = null;
             NotesListBox.DataSource = CurrentProjectData.Notes;
-            NotesListBox.DisplayMember = "Name";
+            NotesListBox.DisplayMember = "Name";*/
         }
 
         private void ClearFields()
         {
             NoteNameLabel.Text = "";
             CategoryLabel.Text = "";
-            CreatedTextBox.Text = "";
-            ModifiedTextBox.Text = "";
+            CreatedDateTimePicker.Value = DateTime.Now;
+            ModifiedDateTimePicker.Value = DateTime.Now;
             ContentTextBox.Text = "";
         }
-
+    
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
-            Form addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.ShowDialog();
+            AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
+            addAndEditNoteForm.AddNote();
+
+            if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
+            {
+                /*CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
+                ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
+                UpdateNotesList();*/
+            }
         }
 
         private void EditNoteButton_Click(object sender, EventArgs e)
@@ -101,8 +113,15 @@ namespace NoteAppUI
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.ShowDialog();
+            AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
+            addAndEditNoteForm.AddNote();
+
+            if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
+            {
+                //CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
+                ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
+                UpdateNotesList();
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

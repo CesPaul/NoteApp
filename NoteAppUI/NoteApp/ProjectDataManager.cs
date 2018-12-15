@@ -31,7 +31,7 @@ namespace NoteApp
         /// <returns></returns>
         public static ProjectData LoadFromFile(string filename)
         {
-            ProjectData project;
+            ProjectData projectData;
             string data;
 
             try
@@ -48,9 +48,9 @@ namespace NoteApp
                 throw e;
             }
 
-            project = JsonConvert.DeserializeObject<ProjectData>(data);
+            projectData = JsonConvert.DeserializeObject<ProjectData>(data);
 
-            return project;
+            return projectData;
         }
     }
 }

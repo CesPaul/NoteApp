@@ -33,12 +33,12 @@ namespace NoteAppUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAndEditNoteForm));
             this.TitleLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.CreatedLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ModifiedDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
+            this.ModifiedLabel = new System.Windows.Forms.Label();
             this.ContentTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
@@ -62,20 +62,20 @@ namespace NoteAppUI
             this.CategoryLabel.TabIndex = 1;
             this.CategoryLabel.Text = "Category:";
             // 
-            // label3
+            // CreatedLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Created:";
+            this.CreatedLabel.AutoSize = true;
+            this.CreatedLabel.Location = new System.Drawing.Point(12, 62);
+            this.CreatedLabel.Name = "CreatedLabel";
+            this.CreatedLabel.Size = new System.Drawing.Size(47, 13);
+            this.CreatedLabel.TabIndex = 2;
+            this.CreatedLabel.Text = "Created:";
             // 
             // TitleTextBox
             // 
             this.TitleTextBox.Location = new System.Drawing.Point(70, 6);
             this.TitleTextBox.Name = "TitleTextBox";
-            this.TitleTextBox.Size = new System.Drawing.Size(718, 20);
+            this.TitleTextBox.Size = new System.Drawing.Size(410, 20);
             this.TitleTextBox.TabIndex = 3;
             // 
             // CategoryComboBox
@@ -103,26 +103,26 @@ namespace NoteAppUI
             this.ModifiedDateTimePicker.Size = new System.Drawing.Size(139, 20);
             this.ModifiedDateTimePicker.TabIndex = 6;
             // 
-            // label4
+            // ModifiedLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 62);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Modified:";
+            this.ModifiedLabel.AutoSize = true;
+            this.ModifiedLabel.Location = new System.Drawing.Point(230, 62);
+            this.ModifiedLabel.Name = "ModifiedLabel";
+            this.ModifiedLabel.Size = new System.Drawing.Size(50, 13);
+            this.ModifiedLabel.TabIndex = 7;
+            this.ModifiedLabel.Text = "Modified:";
             // 
             // ContentTextBox
             // 
             this.ContentTextBox.Location = new System.Drawing.Point(15, 85);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
-            this.ContentTextBox.Size = new System.Drawing.Size(773, 428);
+            this.ContentTextBox.Size = new System.Drawing.Size(465, 428);
             this.ContentTextBox.TabIndex = 8;
             // 
             // OkButton
             // 
-            this.OkButton.Location = new System.Drawing.Point(632, 519);
+            this.OkButton.Location = new System.Drawing.Point(324, 519);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
             this.OkButton.TabIndex = 9;
@@ -132,7 +132,7 @@ namespace NoteAppUI
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(713, 519);
+            this.CancelButton.Location = new System.Drawing.Point(405, 519);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 10;
@@ -145,20 +145,21 @@ namespace NoteAppUI
             this.AcceptButton = this.OkButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 554);
+            this.ClientSize = new System.Drawing.Size(493, 554);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.ContentTextBox);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ModifiedLabel);
             this.Controls.Add(this.ModifiedDateTimePicker);
             this.Controls.Add(this.CreatedDateTimePicker);
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.TitleTextBox);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CreatedLabel);
             this.Controls.Add(this.CategoryLabel);
             this.Controls.Add(this.TitleLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "AddAndEditNoteForm";
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
@@ -170,12 +171,12 @@ namespace NoteAppUI
 
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label CategoryLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label CreatedLabel;
         private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;
         private System.Windows.Forms.DateTimePicker ModifiedDateTimePicker;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label ModifiedLabel;
         private System.Windows.Forms.TextBox ContentTextBox;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CancelButton;

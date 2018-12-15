@@ -175,7 +175,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(478, 268);
             this.Controls.Add(this.AuthorNameLabel);
             this.Controls.Add(this.LogoPictureBox);
@@ -191,6 +191,7 @@
             this.Controls.Add(this.NoteAppLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "AboutForm";
             this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
@@ -211,7 +212,7 @@
         private System.Windows.Forms.LinkLabel EmailLinkLabel;
         private System.Windows.Forms.LinkLabel TgLinkLabel;
         private System.Windows.Forms.LinkLabel GithubLinkLabel;
-        private System.Windows.Forms.PictureBox LogoPictureBox;
         private System.Windows.Forms.Label AuthorNameLabel;
+        private System.Windows.Forms.PictureBox LogoPictureBox;
     }
 }

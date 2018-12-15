@@ -111,5 +111,14 @@
   <ItemGroup>
     <None Include="NoteAppLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\edit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
