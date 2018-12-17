@@ -109,12 +109,14 @@
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
             this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.editNoteToolStripMenuItem.Text = "Edit Note";
+            this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.editNoteToolStripMenuItem_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
             this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.removeNoteToolStripMenuItem.Text = "Remove Note";
+            this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.removeNoteToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -221,6 +223,7 @@
             this.NotesListBox.Name = "NotesListBox";
             this.NotesListBox.Size = new System.Drawing.Size(238, 433);
             this.NotesListBox.TabIndex = 0;
+            this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged_1);
             // 
             // ModifiedDateTimePicker
             // 
@@ -312,6 +315,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteApp";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);

@@ -61,6 +61,12 @@
     <Compile Include="AddAndEditNoteForm.Designer.cs">
       <DependentUpon>AddAndEditNoteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddTestNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTestNoteForm.Designer.cs">
+      <DependentUpon>AddTestNoteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddAndEditNoteForm.resx">
       <DependentUpon>AddAndEditNoteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddTestNoteForm.resx">
+      <DependentUpon>AddTestNoteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -107,9 +116,6 @@
       <Project>{0bcc8c46-871e-464c-96d5-4d32d58337df}</Project>
       <Name>NoteApp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NoteAppLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\add.png" />
