@@ -12,13 +12,14 @@ namespace NoteApp
     /// </summary>
     public class ProjectData
     {
-        private List<Note> _notes = new List<Note>();
+        private List<Note> _notes;
 
         private string _filename;
 
         public ProjectData(string filename)
         {
-            filename = filename;
+            _notes = new List<Note>();
+            Filename = filename;
         }
 
         public string Filename

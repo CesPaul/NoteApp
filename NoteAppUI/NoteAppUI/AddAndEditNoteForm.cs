@@ -27,7 +27,9 @@ namespace NoteAppUI
         public AddAndEditNoteForm()
         {
             InitializeComponent();
-            // _isEdit = false;
+            // Устанавливаем всплывающие подсказки
+            OkButtonToolTip.SetToolTip(OkButton, "Save changes to current note");
+            CancelButtonToolTip.SetToolTip(CancelButton, "Exit without saving");
         }
 
         public void AddNote()
@@ -56,11 +58,11 @@ namespace NoteAppUI
             /*}
             else
             {*/
-                NoteCategory noteCategory = NoteCategory.Other;
+                //NoteCategory noteCategory = NoteCategory.Other;
                 
                 // Парсим с комбобокса выбранную пользователем категорию.
                 // Если не спарсил - то поставит дефолтное значение NoteCategory.
-                Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
+                //Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
                 CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, NoteCategory.Other);
             /*}*/
             this.DialogResult = DialogResult.OK;

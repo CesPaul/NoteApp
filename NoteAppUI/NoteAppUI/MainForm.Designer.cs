@@ -307,6 +307,7 @@
             this.MainMenuStrip = this.MainMenu;
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NoteApp";
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();

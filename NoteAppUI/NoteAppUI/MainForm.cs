@@ -22,7 +22,18 @@ namespace NoteAppUI
         public ProjectData CurrentProjectData
         {
             get { return _currentProjectData; }
-            set { _currentProjectData = value; }
+            set
+            {
+                if (value == null)
+                {
+                    _currentProjectData = new ProjectData("ProjectData");
+                }
+                else
+                {
+                    _currentProjectData = value;    
+                }
+
+            }
         }
 
         public MainForm()
@@ -60,11 +71,11 @@ namespace NoteAppUI
             }
 
             // Подгрузка данных в ListBox.
-            /*NotesListBox.DataSource = CurrentProjectData.Notes;
-            NotesListBox.DisplayMember = "Name";*/
+            NotesListBox.DataSource = CurrentProjectData.Notes;
+            NotesListBox.DisplayMember = "Name";
 
-             // Чистим поля.
-             //ClearFields();
+            // Чистим поля.
+            ClearFields();
         }
 
         private void UpdateNotesList()
@@ -73,9 +84,8 @@ namespace NoteAppUI
             CurrentProjectData = ProjectDataManager.LoadFromFile("ProjectData");
 
             // Обновляем данные коллекции
-            /*NotesListBox.DataSource = null;
             NotesListBox.DataSource = CurrentProjectData.Notes;
-            NotesListBox.DisplayMember = "Name";*/
+            NotesListBox.DisplayMember = "Name";
         }
 
         private void ClearFields()
@@ -86,7 +96,10 @@ namespace NoteAppUI
             ModifiedDateTimePicker.Value = DateTime.Now;
             ContentTextBox.Text = "";
         }
-    
+
+        //Относится к кнопкам.
+        #region Buttons
+
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
             AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
@@ -94,9 +107,9 @@ namespace NoteAppUI
 
             if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
             {
-                /*CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
+                CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
                 ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                UpdateNotesList();*/
+                UpdateNotesList();
             }
         }
 
@@ -105,6 +118,11 @@ namespace NoteAppUI
             // Form addAndEditNoteForm = new AddAndEditNoteForm(_projectData.Notes[0]);
             // addAndEditNoteForm.Show();
         }
+
+        #endregion
+
+        //Относится к меню.
+        #region Menu
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -129,5 +147,19 @@ namespace NoteAppUI
             Form aboutForm = new AboutForm();
             aboutForm.ShowDialog();
         }
+
+        #endregion
+
+        private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NoteId = NotesListBox.SelectedIndex;
+
+            NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
+
+            CreatedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfCreation;
+            ModifiedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
+            ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
+        }
+
     }
 }

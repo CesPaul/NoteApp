@@ -39,8 +39,8 @@
             this.EmailLinkLabel = new System.Windows.Forms.LinkLabel();
             this.TgLinkLabel = new System.Windows.Forms.LinkLabel();
             this.GithubLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.AuthorNameLabel = new System.Windows.Forms.Label();
+            this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,6 +150,16 @@
             this.GithubLinkLabel.Text = "github.com/CesPaul";
             this.GithubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLinkLabel_LinkClicked);
             // 
+            // AuthorNameLabel
+            // 
+            this.AuthorNameLabel.AutoSize = true;
+            this.AuthorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AuthorNameLabel.Location = new System.Drawing.Point(97, 68);
+            this.AuthorNameLabel.Name = "AuthorNameLabel";
+            this.AuthorNameLabel.Size = new System.Drawing.Size(126, 17);
+            this.AuthorNameLabel.TabIndex = 14;
+            this.AuthorNameLabel.Text = "Pavel Gumennikov";
+            // 
             // LogoPictureBox
             // 
             this.LogoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -160,16 +170,6 @@
             this.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPictureBox.TabIndex = 13;
             this.LogoPictureBox.TabStop = false;
-            // 
-            // AuthorNameLabel
-            // 
-            this.AuthorNameLabel.AutoSize = true;
-            this.AuthorNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AuthorNameLabel.Location = new System.Drawing.Point(97, 68);
-            this.AuthorNameLabel.Name = "AuthorNameLabel";
-            this.AuthorNameLabel.Size = new System.Drawing.Size(126, 17);
-            this.AuthorNameLabel.TabIndex = 14;
-            this.AuthorNameLabel.Text = "Pavel Gumennikov";
             // 
             // AboutForm
             // 
@@ -193,6 +193,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AboutForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
             this.ResumeLayout(false);

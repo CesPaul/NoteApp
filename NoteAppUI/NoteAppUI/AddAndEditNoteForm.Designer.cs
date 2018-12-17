@@ -30,6 +30,7 @@ namespace NoteAppUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAndEditNoteForm));
             this.TitleLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
@@ -42,6 +43,8 @@ namespace NoteAppUI
             this.ContentTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.OkButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CancelButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -161,6 +164,7 @@ namespace NoteAppUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AddAndEditNoteForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -180,5 +184,7 @@ namespace NoteAppUI
         private System.Windows.Forms.TextBox ContentTextBox;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.ToolTip OkButtonToolTip;
+        private System.Windows.Forms.ToolTip CancelButtonToolTip;
     }
 }
