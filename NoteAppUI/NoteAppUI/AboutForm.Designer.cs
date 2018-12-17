@@ -40,8 +40,6 @@
             this.TgLinkLabel = new System.Windows.Forms.LinkLabel();
             this.GithubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.AuthorNameLabel = new System.Windows.Forms.Label();
-            this.LogoPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // NoteAppLabel
@@ -160,17 +158,6 @@
             this.AuthorNameLabel.TabIndex = 14;
             this.AuthorNameLabel.Text = "Pavel Gumennikov";
             // 
-            // LogoPictureBox
-            // 
-            this.LogoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.LogoPictureBox.Image = global::NoteAppUI.Properties.Resources.NoteAppLogo;
-            this.LogoPictureBox.Location = new System.Drawing.Point(316, 16);
-            this.LogoPictureBox.Name = "LogoPictureBox";
-            this.LogoPictureBox.Size = new System.Drawing.Size(150, 176);
-            this.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.LogoPictureBox.TabIndex = 13;
-            this.LogoPictureBox.TabStop = false;
-            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,7 +165,6 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(478, 268);
             this.Controls.Add(this.AuthorNameLabel);
-            this.Controls.Add(this.LogoPictureBox);
             this.Controls.Add(this.GithubLinkLabel);
             this.Controls.Add(this.TgLinkLabel);
             this.Controls.Add(this.EmailLinkLabel);
@@ -195,7 +181,6 @@
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
-            ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,6 +199,5 @@
         private System.Windows.Forms.LinkLabel TgLinkLabel;
         private System.Windows.Forms.LinkLabel GithubLinkLabel;
         private System.Windows.Forms.Label AuthorNameLabel;
-        private System.Windows.Forms.PictureBox LogoPictureBox;
     }
 }

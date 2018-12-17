@@ -154,12 +154,21 @@ namespace NoteAppUI
         {
             NoteId = NotesListBox.SelectedIndex;
 
-            NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
-
+            NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
             CreatedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfCreation;
             ModifiedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
             ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
         }
 
+        private void RemoveNoteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to remove note?", "NoteApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                CurrentProjectData.Notes.RemoveAt(NoteId);
+                ProjectDataManager.SaveToFile(CurrentProjectData,"ProjectData");
+                UpdateNotesList();
+            }
+        }
     }
 }

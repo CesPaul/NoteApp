@@ -40,6 +40,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.RemoveNoteButton = new System.Windows.Forms.Button();
+            this.EditNoteButton = new System.Windows.Forms.Button();
+            this.AddNoteButton = new System.Windows.Forms.Button();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.ShowCategoryLabel = new System.Windows.Forms.Label();
             this.NotesListBox = new System.Windows.Forms.ListBox();
@@ -51,8 +53,6 @@
             this.CreatedLabel = new System.Windows.Forms.Label();
             this.StaticCategoryLabel = new System.Windows.Forms.Label();
             this.ContentTextBox = new System.Windows.Forms.TextBox();
-            this.EditNoteButton = new System.Windows.Forms.Button();
-            this.AddNoteButton = new System.Windows.Forms.Button();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -170,10 +170,34 @@
             this.RemoveNoteButton.Size = new System.Drawing.Size(27, 26);
             this.RemoveNoteButton.TabIndex = 5;
             this.RemoveNoteButton.UseVisualStyleBackColor = true;
+            this.RemoveNoteButton.Click += new System.EventHandler(this.RemoveNoteButton_Click);
+            // 
+            // EditNoteButton
+            // 
+            this.EditNoteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.edit;
+            this.EditNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.EditNoteButton.Location = new System.Drawing.Point(45, 480);
+            this.EditNoteButton.Name = "EditNoteButton";
+            this.EditNoteButton.Size = new System.Drawing.Size(27, 26);
+            this.EditNoteButton.TabIndex = 4;
+            this.EditNoteButton.UseVisualStyleBackColor = true;
+            this.EditNoteButton.Click += new System.EventHandler(this.EditNoteButton_Click);
+            // 
+            // AddNoteButton
+            // 
+            this.AddNoteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.add;
+            this.AddNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.AddNoteButton.Location = new System.Drawing.Point(12, 480);
+            this.AddNoteButton.Name = "AddNoteButton";
+            this.AddNoteButton.Size = new System.Drawing.Size(27, 26);
+            this.AddNoteButton.TabIndex = 3;
+            this.AddNoteButton.UseVisualStyleBackColor = true;
+            this.AddNoteButton.Click += new System.EventHandler(this.AddNoteButton_Click);
             // 
             // CategoryComboBox
             // 
             this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategoryComboBox.Enabled = false;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(97, 9);
             this.CategoryComboBox.Name = "CategoryComboBox";
@@ -183,6 +207,7 @@
             // ShowCategoryLabel
             // 
             this.ShowCategoryLabel.AutoSize = true;
+            this.ShowCategoryLabel.Enabled = false;
             this.ShowCategoryLabel.Location = new System.Drawing.Point(9, 12);
             this.ShowCategoryLabel.Name = "ShowCategoryLabel";
             this.ShowCategoryLabel.Size = new System.Drawing.Size(79, 13);
@@ -272,28 +297,6 @@
             this.ContentTextBox.ReadOnly = true;
             this.ContentTextBox.Size = new System.Drawing.Size(410, 414);
             this.ContentTextBox.TabIndex = 0;
-            // 
-            // EditNoteButton
-            // 
-            this.EditNoteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.edit;
-            this.EditNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.EditNoteButton.Location = new System.Drawing.Point(45, 480);
-            this.EditNoteButton.Name = "EditNoteButton";
-            this.EditNoteButton.Size = new System.Drawing.Size(27, 26);
-            this.EditNoteButton.TabIndex = 4;
-            this.EditNoteButton.UseVisualStyleBackColor = true;
-            this.EditNoteButton.Click += new System.EventHandler(this.EditNoteButton_Click);
-            // 
-            // AddNoteButton
-            // 
-            this.AddNoteButton.BackgroundImage = global::NoteAppUI.Properties.Resources.add;
-            this.AddNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.AddNoteButton.Location = new System.Drawing.Point(12, 480);
-            this.AddNoteButton.Name = "AddNoteButton";
-            this.AddNoteButton.Size = new System.Drawing.Size(27, 26);
-            this.AddNoteButton.TabIndex = 3;
-            this.AddNoteButton.UseVisualStyleBackColor = true;
-            this.AddNoteButton.Click += new System.EventHandler(this.AddNoteButton_Click);
             // 
             // MainForm
             // 

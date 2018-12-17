@@ -34,7 +34,7 @@ namespace NoteAppUI
 
         public void AddNote()
         {
-            TitleTextBox.Text = "Note";
+            TitleTextBox.Text = "Noname";
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
             CreatedDateTimePicker.Value = DateTime.Now;
             ModifiedDateTimePicker.Value = DateTime.Now;
@@ -50,19 +50,17 @@ namespace NoteAppUI
                 }
                 _editNote.Name = TitleTextBox.Text;
                 _editNote.Content = ContentTextBox.Text;
-                NoteCategory noteCategory = NoteCategory.Other;
                 // Парсим с комбобокса выбранную пользователем категорию.
                 // Если не спарсил - то поставит дефолтное значение NoteCategory.
-                Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
                 _editNote.Category = noteCategory;*/
             /*}
             else
             {*/
-                //NoteCategory noteCategory = NoteCategory.Other;
+                NoteCategory noteCategory;
                 
                 // Парсим с комбобокса выбранную пользователем категорию.
                 // Если не спарсил - то поставит дефолтное значение NoteCategory.
-                //Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
+                Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out noteCategory);
                 CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, NoteCategory.Other);
             /*}*/
             this.DialogResult = DialogResult.OK;
