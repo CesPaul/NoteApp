@@ -16,19 +16,16 @@ namespace NoteAppUI
             set { _isEdit = value; }
         }
 
-        // Редактируемая запись. Если форма открыта на добавление, то null.
-        private readonly Note _editNote;
-
         private Note _currentNote;
+
         public Note CurrentNote
         {
             get { return _currentNote; }
             set { _currentNote = value; }
         }
-
-        private NoteCategory _currentCategory;
-        public NoteCategory CurrentCategory { get => _currentCategory; set => _currentCategory = value; }
         
+        public NoteCategory CurrentCategory;
+
         public AddAndEditNoteForm()
         {
             InitializeComponent();
@@ -39,7 +36,8 @@ namespace NoteAppUI
         }
         
 
-        
+        // TODO: Исправить установку дат создания и редактирования.
+        // TODO: Поменять DataTimePicker на Label или ListBox.
         /// <summary>
         /// Метод создания заметки.
         /// </summary>
@@ -50,8 +48,7 @@ namespace NoteAppUI
             CreatedDateTimePicker.Value = DateTime.Now;
             ModifiedDateTimePicker.Value = DateTime.Now;
         }
-
-        // TODO: Доработать подгрузку категории редактируемой заметки.
+        
         /// <summary>
         /// Метод редактирования заметки.
         /// </summary>
@@ -88,13 +85,13 @@ namespace NoteAppUI
                     _editNote.Category = noteCategory;
                 }
                 else
-                {
-                    // Парсим с комбобокса выбранную пользователем категорию.
-                    // Если не спарсил - то поставит дефолтное значение NoteCategory.
-                    //Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out NoteCategory.Other);*/
+                {*/
             }
+            // Парсим с комбобокса выбранную пользователем категорию.
+            // Если не спарсил - то поставит дефолтное значение NoteCategory.
+            Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out CurrentCategory);
+            
             CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
-            /*}*/
             this.DialogResult = DialogResult.OK;
         }
 

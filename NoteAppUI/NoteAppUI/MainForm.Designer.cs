@@ -223,7 +223,7 @@
             this.NotesListBox.Name = "NotesListBox";
             this.NotesListBox.Size = new System.Drawing.Size(238, 433);
             this.NotesListBox.TabIndex = 0;
-            this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged_1);
+            this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
             // 
             // ModifiedDateTimePicker
             // 
@@ -293,7 +293,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContentTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.ContentTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.ContentTextBox.Location = new System.Drawing.Point(12, 92);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";

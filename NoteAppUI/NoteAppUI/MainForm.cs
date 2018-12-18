@@ -108,8 +108,8 @@ namespace NoteAppUI
         {
             NoteNameLabel.Text = "";
             CategoryLabel.Text = "";
-            CreatedDateTimePicker.Value = DateTime.Now;
-            ModifiedDateTimePicker.Value = DateTime.Now;
+            CreatedDateTimePicker.ResetText();
+            ModifiedDateTimePicker.ResetText();
             ContentTextBox.Text = "";
         }
 
@@ -154,6 +154,7 @@ namespace NoteAppUI
                 {
                     CurrentProjectData.Notes.RemoveAt(NoteId);
                     ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
+                    ClearFields();
                     UpdateNotesList();
                 }
             }
@@ -221,8 +222,7 @@ namespace NoteAppUI
         #endregion
 
         // Событие при смене выбора заметки.
-
-        private void NotesListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             NoteId = NotesListBox.SelectedIndex;
 
@@ -254,7 +254,5 @@ namespace NoteAppUI
                 e.Cancel = true;
             }
         }
-
-        
     }
 }
