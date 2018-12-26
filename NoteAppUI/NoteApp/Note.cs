@@ -18,7 +18,7 @@ namespace NoteApp
 
         private NoteCategory _category;
 
-        private readonly DateTime _dateOfCreation;
+        private DateTime _dateOfCreation;
 
         private DateTime _dateOfLastEdit;
 
@@ -74,6 +74,7 @@ namespace NoteApp
         public DateTime DateOfCreation
         {
             get { return _dateOfCreation; }
+            set { _dateOfCreation = value; }
         }
 
         public DateTime DateOfLastEdit
@@ -93,7 +94,7 @@ namespace NoteApp
             Name = name;
             Content = content;
             Category = category;
-            _dateOfCreation = DateTime.Now;
+            DateOfCreation = DateTime.Now;
             DateOfLastEdit = DateTime.Now;
         }
 

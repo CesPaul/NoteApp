@@ -108,8 +108,8 @@ namespace NoteAppUI
         {
             NoteNameLabel.Text = "";
             CategoryLabel.Text = "";
-            CreatedDateTimePicker.ResetText();
-            ModifiedDateTimePicker.ResetText();
+            CreatedDateTimeLabel.Text = "";
+            ModifiedDateTimeLabel.Text = "";
             ContentTextBox.Text = "";
         }
 
@@ -231,8 +231,8 @@ namespace NoteAppUI
                 NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
                 ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
                 CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
-                CreatedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfCreation;
-                ModifiedDateTimePicker.Value = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
+                CreatedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfCreation.ToString();
+                ModifiedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfLastEdit.ToString();
             }
         }
 

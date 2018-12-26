@@ -37,14 +37,14 @@ namespace NoteAppUI
             this.CreatedLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
-            this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.ModifiedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ModifiedLabel = new System.Windows.Forms.Label();
             this.ContentTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.OkButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CancelButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CreatedDateTimeLabel = new System.Windows.Forms.Label();
+            this.ModifiedDateTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -90,22 +90,6 @@ namespace NoteAppUI
             this.CategoryComboBox.Size = new System.Drawing.Size(139, 21);
             this.CategoryComboBox.TabIndex = 4;
             // 
-            // CreatedDateTimePicker
-            // 
-            this.CreatedDateTimePicker.Enabled = false;
-            this.CreatedDateTimePicker.Location = new System.Drawing.Point(70, 59);
-            this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
-            this.CreatedDateTimePicker.Size = new System.Drawing.Size(139, 20);
-            this.CreatedDateTimePicker.TabIndex = 5;
-            // 
-            // ModifiedDateTimePicker
-            // 
-            this.ModifiedDateTimePicker.Enabled = false;
-            this.ModifiedDateTimePicker.Location = new System.Drawing.Point(286, 59);
-            this.ModifiedDateTimePicker.Name = "ModifiedDateTimePicker";
-            this.ModifiedDateTimePicker.Size = new System.Drawing.Size(139, 20);
-            this.ModifiedDateTimePicker.TabIndex = 6;
-            // 
             // ModifiedLabel
             // 
             this.ModifiedLabel.AutoSize = true;
@@ -118,6 +102,7 @@ namespace NoteAppUI
             // ContentTextBox
             // 
             this.ContentTextBox.Location = new System.Drawing.Point(15, 85);
+            this.ContentTextBox.MaxLength = 500;
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
             this.ContentTextBox.Size = new System.Drawing.Size(465, 428);
@@ -143,18 +128,36 @@ namespace NoteAppUI
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // CreatedDateTimeLabel
+            // 
+            this.CreatedDateTimeLabel.AutoSize = true;
+            this.CreatedDateTimeLabel.Location = new System.Drawing.Point(67, 62);
+            this.CreatedDateTimeLabel.Name = "CreatedDateTimeLabel";
+            this.CreatedDateTimeLabel.Size = new System.Drawing.Size(90, 13);
+            this.CreatedDateTimeLabel.TabIndex = 11;
+            this.CreatedDateTimeLabel.Text = "CreatedDateTime";
+            // 
+            // ModifiedDateTimeLabel
+            // 
+            this.ModifiedDateTimeLabel.AutoSize = true;
+            this.ModifiedDateTimeLabel.Location = new System.Drawing.Point(295, 62);
+            this.ModifiedDateTimeLabel.Name = "ModifiedDateTimeLabel";
+            this.ModifiedDateTimeLabel.Size = new System.Drawing.Size(93, 13);
+            this.ModifiedDateTimeLabel.TabIndex = 12;
+            this.ModifiedDateTimeLabel.Text = "ModifiedDateTime";
+            // 
             // AddAndEditNoteForm
             // 
             this.AcceptButton = this.OkButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 554);
+            this.Controls.Add(this.ModifiedDateTimeLabel);
+            this.Controls.Add(this.CreatedDateTimeLabel);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.ContentTextBox);
             this.Controls.Add(this.ModifiedLabel);
-            this.Controls.Add(this.ModifiedDateTimePicker);
-            this.Controls.Add(this.CreatedDateTimePicker);
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.CreatedLabel);
@@ -178,13 +181,13 @@ namespace NoteAppUI
         private System.Windows.Forms.Label CreatedLabel;
         private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
-        private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;
-        private System.Windows.Forms.DateTimePicker ModifiedDateTimePicker;
         private System.Windows.Forms.Label ModifiedLabel;
         private System.Windows.Forms.TextBox ContentTextBox;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.ToolTip OkButtonToolTip;
         private System.Windows.Forms.ToolTip CancelButtonToolTip;
+        private System.Windows.Forms.Label CreatedDateTimeLabel;
+        private System.Windows.Forms.Label ModifiedDateTimeLabel;
     }
 }

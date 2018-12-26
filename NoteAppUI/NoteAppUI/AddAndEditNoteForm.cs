@@ -35,18 +35,16 @@ namespace NoteAppUI
             CancelButtonToolTip.SetToolTip(CancelButton, "Exit without saving");
         }
         
-
-        // TODO: Исправить установку дат создания и редактирования.
-        // TODO: Поменять DataTimePicker на Label или ListBox.
         /// <summary>
         /// Метод создания заметки.
         /// </summary>
         public void AddNote()
         {
+            IsEdit = false;
             TitleTextBox.Text = "Noname";
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
-            CreatedDateTimePicker.Value = DateTime.Now;
-            ModifiedDateTimePicker.Value = DateTime.Now;
+            CreatedDateTimeLabel.Text = DateTime.Now.ToString();
+            ModifiedDateTimeLabel.Text = DateTime.Now.ToString();
         }
         
         /// <summary>
@@ -55,43 +53,35 @@ namespace NoteAppUI
         /// <param name="currentNote"></param>
         public void EditNote(Note currentNote)
         {
+            IsEdit = true;
             CurrentNote = currentNote;
 
-            //Флаг на редактирование.
-            IsEdit = true;
+            CurrentNote.DateOfLastEdit = DateTime.Now;
 
             //Заполнение данных
             TitleTextBox.Text = CurrentNote.Name;
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
-            CreatedDateTimePicker.Value = CurrentNote.DateOfCreation;
-            ModifiedDateTimePicker.Value = CurrentNote.DateOfLastEdit;
+            CreatedDateTimeLabel.Text = CurrentNote.DateOfCreation.ToString();
+            ModifiedDateTimeLabel.Text = CurrentNote.DateOfLastEdit.ToString();
             ContentTextBox.Text = CurrentNote.Content;
-
         }
         
         private void OkButton_Click(object sender, EventArgs e)
         {
-            {
-                /*if (_isEdit)
-                {
-                    if (_editNote == null)
-                    {
-                        throw new ArgumentException("Note is null in edit mode.");
-                    }
-                    _editNote.Name = TitleTextBox.Text;
-                    _editNote.Content = ContentTextBox.Text;
-                    // Парсим с комбобокса выбранную пользователем категорию.
-                    // Если не спарсил - то поставит дефолтное значение NoteCategory.
-                    _editNote.Category = noteCategory;
-                }
-                else
-                {*/
-            }
             // Парсим с комбобокса выбранную пользователем категорию.
             // Если не спарсил - то поставит дефолтное значение NoteCategory.
             Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out CurrentCategory);
+            if (IsEdit)
+            {
+                var CurrentCreationDateTime = CurrentNote.DateOfCreation;
+                CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
+                CurrentNote.DateOfCreation = CurrentCreationDateTime;
+            }
+            else
+            {
+                CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
+            }
             
-            CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
             this.DialogResult = DialogResult.OK;
         }
 
