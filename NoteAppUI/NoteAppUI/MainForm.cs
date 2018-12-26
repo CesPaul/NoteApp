@@ -232,8 +232,27 @@ namespace NoteAppUI
                 ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
                 CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
                 CreatedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfCreation.ToString();
-                ModifiedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfLastEdit.ToString();
+                SetModifiedDateTime();
             }
+        }
+
+        private void SetModifiedDateTime()
+        {
+
+            DateTime dateOfLastEdit = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
+            DateTime dateOfCreation = CurrentProjectData.Notes[NoteId].DateOfCreation;
+            if (dateOfCreation == dateOfLastEdit)
+            {
+                ModifiedDateTimeLabel.Visible = false;
+                ModifiedLabel.Visible = false;
+            }
+            else
+            {
+                ModifiedDateTimeLabel.Visible = true;
+                ModifiedLabel.Visible = true;
+            }
+
+            ModifiedDateTimeLabel.Text = dateOfLastEdit.ToString();
         }
 
         // Обработчик при закрытии окна программы.

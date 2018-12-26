@@ -43,8 +43,9 @@ namespace NoteAppUI
             IsEdit = false;
             TitleTextBox.Text = "Noname";
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
-            CreatedDateTimeLabel.Text = DateTime.Now.ToString();
-            ModifiedDateTimeLabel.Text = DateTime.Now.ToString();
+            DateTime dateTimeNow = DateTime.Now;
+            CreatedDateTimeLabel.Text = dateTimeNow.ToString();
+            SetModifiedDateTime(dateTimeNow, dateTimeNow);
         }
         
         /// <summary>
@@ -62,7 +63,7 @@ namespace NoteAppUI
             TitleTextBox.Text = CurrentNote.Name;
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
             CreatedDateTimeLabel.Text = CurrentNote.DateOfCreation.ToString();
-            ModifiedDateTimeLabel.Text = CurrentNote.DateOfLastEdit.ToString();
+            SetModifiedDateTime(currentNote.DateOfLastEdit, currentNote.DateOfCreation);
             ContentTextBox.Text = CurrentNote.Content;
         }
         
@@ -94,6 +95,27 @@ namespace NoteAppUI
             {
                 this.DialogResult = DialogResult.Cancel;
             }
+        }
+
+        /// <summary>
+        /// Реализует скрытие даты редактирования у созданных заметок.
+        /// </summary>
+        /// <param name="dateOfLastEdit"></param>
+        /// <param name="dateOfCreation"></param>
+        private void SetModifiedDateTime(DateTime dateOfLastEdit, DateTime dateOfCreation)
+        {
+            if (dateOfCreation == dateOfLastEdit)
+            {
+                ModifiedDateTimeLabel.Visible = false;
+                ModifiedLabel.Visible = false;
+            }
+            else
+            {
+                ModifiedDateTimeLabel.Visible = true;
+                ModifiedLabel.Visible = true;
+            }
+
+            ModifiedDateTimeLabel.Text = dateOfLastEdit.ToString();
         }
     }
 }
