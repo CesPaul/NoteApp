@@ -18,39 +18,53 @@ namespace NoteApp
         /// Сохраняет объект проекта в файл.
         /// </summary>
         /// <param name="data"></param>
-        /// <param name="filename"></param>
-        public static void SaveToFile(ProjectData data, string filename)
+        public static void SaveToFile(ProjectData data)
         {
-            File.WriteAllText(_pathToFile, JsonConvert.SerializeObject(data));
+            using (StreamWriter file = File.CreateText(_pathToFile))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, data);
+            }
         }
 
         /// <summary>
         /// Загружает объект проекта из файла.
         /// </summary>
-        /// <param name="filename"></param>
         /// <returns></returns>
-        public static ProjectData LoadFromFile(string filename)
+        public static ProjectData LoadFromFile()
         {
-            ProjectData projectData;
-            string data;
-
             try
             {
-                data = File.ReadAllText(_pathToFile);
+                using (StreamReader file = File.OpenText(_pathToFile))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (ProjectData)serializer.Deserialize(file, typeof(ProjectData));
+                }
             }
-            catch (DirectoryNotFoundException e)
+            catch (FileNotFoundException)
             {
-                throw e;
-            }
+                ProjectData projectData = new ProjectData();
+                ProjectDataManager.SaveToFile(projectData);
 
-            catch (FileNotFoundException e)
+                using (StreamReader file = File.OpenText(_pathToFile))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (ProjectData)serializer.Deserialize(file, typeof(ProjectData));
+                }
+            }
+            catch (DirectoryNotFoundException)
             {
-                throw e;
+                Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp");
+
+                ProjectData projectData = new ProjectData();
+                ProjectDataManager.SaveToFile(projectData);
+
+                using (StreamReader file = File.OpenText(_pathToFile))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (ProjectData)serializer.Deserialize(file, typeof(ProjectData));
+                }
             }
-
-            projectData = JsonConvert.DeserializeObject<ProjectData>(data);
-
-            return projectData;
         }
     }
 }

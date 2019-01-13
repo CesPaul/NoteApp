@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NoteApp;
 
 namespace NoteApp
 {
@@ -12,17 +8,19 @@ namespace NoteApp
     /// </summary>
     public class ProjectData
     {
-        private List<Note> _notes;
-
-        private string _filename;
-
-        public ProjectData(string filename)
+        private List<Note> _notes = new List<Note>();
+        
+        public List<Note> Notes
         {
-            _notes = new List<Note>();
-            Filename = filename;
+            get { return _notes; }
         }
 
-        public string Filename
+        /// <summary>
+        /// Хранит текущую заметку
+        /// </summary>
+        public Note CurrentNote { get; set; }
+
+        /*public string Filename
         {
             get { return _filename; }
             set
@@ -40,11 +38,7 @@ namespace NoteApp
                     _filename = value;
                 }
             }
-        }
+        }*/
 
-        public List<Note> Notes
-        {
-            get { return _notes; }
-        }
     }
 }

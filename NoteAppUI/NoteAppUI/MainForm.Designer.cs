@@ -126,13 +126,11 @@
             // CategoryComboBox
             // 
             this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CategoryComboBox.Enabled = false;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(104, 11);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(146, 21);
             this.CategoryComboBox.TabIndex = 2;
-            this.CategoryComboBox.Visible = false;
             // 
             // ShowCategoryLabel
             // 
@@ -144,7 +142,6 @@
             this.ShowCategoryLabel.Size = new System.Drawing.Size(89, 15);
             this.ShowCategoryLabel.TabIndex = 1;
             this.ShowCategoryLabel.Text = "Show Category";
-            this.ShowCategoryLabel.Visible = false;
             // 
             // NotesListBox
             // 

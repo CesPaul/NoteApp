@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -8,13 +7,11 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
-
         /// <summary>
         /// Хранит номер текущей заметки.
         /// </summary>
         private int _noteId;
         public int NoteId { get; set; }
-
         /// <summary>
         /// Хранит экземпляр текущего проекта.
         /// </summary>
@@ -26,53 +23,28 @@ namespace NoteAppUI
         public ProjectData CurrentProjectData
         {
             get { return _currentProjectData; }
-            set
-            {
-                if (value == null)
-                {
-                    _currentProjectData = new ProjectData("ProjectData");
-                }
-                else
-                {
-                    _currentProjectData = value;
-                }
-
-            }
+            set { _currentProjectData = value; }
         }
 
         public MainForm()
         {
             InitializeComponent();
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+
+            CategoryComboBox.Items.Add("All");
+
+            foreach (NoteCategory element in Enum.GetValues(typeof(NoteCategory)))
+            {
+                CategoryComboBox.Items.Add(element);
+            }
+
+            CategoryComboBox.SelectedIndex = 0;
+
+            // Задаем клавишу быстрого доступа для удаления
+            removeNoteToolStripMenuItem.ShortcutKeys = Keys.Delete;
 
             // Пытаемся загрузить данные из файла. Если нет - создаём новый файл.
-            try
-            {
-                CurrentProjectData = ProjectDataManager.LoadFromFile("ProjectData");
-            }
-            // Создаём директорию храниения файла при её отсутствии.
-            catch (DirectoryNotFoundException)
-            {
-                if (Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp") == false)
-                {
-                    Directory.CreateDirectory(
-                        System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp");
-                    File.Create(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                "\\NoteApp\\NoteApp.notes");
 
-                    CurrentProjectData = new ProjectData("ProjectData");
-                }
-            }
-            // Создаём пустой файл хранения данных проекта.
-            catch (FileNotFoundException)
-            {
-                if (Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp\\NoteApp.notes") == false)
-                {
-                    File.Create(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\NoteApp\\NoteApp.notes");
-                }
-
-                CurrentProjectData = new ProjectData("ProjectData");
-            }
+            CurrentProjectData = ProjectDataManager.LoadFromFile();
 
             // Подгрузка данных в ListBox.
             NotesListBox.DataSource = CurrentProjectData.Notes;
@@ -80,28 +52,61 @@ namespace NoteAppUI
 
             // Чистим поля.
             ClearFields();
-
-            // Временная фича для автодобавления тестовой заметки.
-            // TODO: Удалить форму AddTestNote.cs и этот блок после разработки бизнес-логики.
-            {
-                AddTestNoteForm addTestNoteForm = new AddTestNoteForm();
-                addTestNoteForm.AddNote();
-                CurrentProjectData.Notes.Add(addTestNoteForm.CurrentNote);
-                ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                UpdateNotesList();
-            }
         }
 
         // Обновление листа заметок.
         private void UpdateNotesList()
         {
+            // Сохраняемся всякий раз, когда обновляем данные
+            ProjectDataManager.SaveToFile(CurrentProjectData);
+
             // Перезагружаем проект
-            CurrentProjectData = ProjectDataManager.LoadFromFile("ProjectData");
+            CurrentProjectData = ProjectDataManager.LoadFromFile();
 
             // Обновляем данные коллекции
             NotesListBox.DataSource = CurrentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";
         }
+
+        /*private void UpdateNotesList(NoteCategory category)
+        {
+            // Сохраняемся всякий раз, когда обновляем данные
+            ProjectDataManager.SaveToFile(CurrentProjectData);
+
+            // Перезагружаем проект
+            CurrentProjectData = ProjectDataManager.LoadFromFile();
+
+            // Если нет заметок - ничего не делаем
+            try
+            {
+                CurrentProjectData.SortNotesCollection();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
+            // Обновляем данные коллекции
+            NotesListBox.DataSource = null;
+
+            // Если пришёл пустой список - ничего не делаем
+            try
+            {
+                FilteredList = CurrentProjectData.SortNotesCollection(category);
+                NotesListBox.DataSource = FilteredList;
+            }
+            catch (InvalidOperationException)
+            {
+            }
+
+            NotesListBox.DisplayMember = "Name";
+
+            //// Снимаем выделение
+            //if (NotesListBox.Items.Count != 0)
+            //{
+            //    NotesListBox.SelectedIndex = -1;
+            //}
+        }*/
 
         // Очистка полей.
         private void ClearFields()
@@ -118,46 +123,17 @@ namespace NoteAppUI
 
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
-            AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.AddNote();
-
-            if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
-            {
-                CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
-                ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                UpdateNotesList();
-            }
+            addNoteToolStripMenuItem_Click(sender, e);
         }
 
         private void EditNoteButton_Click(object sender, EventArgs e)
         {
-            if (NotesListBox.SelectedIndex != -1)
-            {
-                AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
-                addAndEditNoteForm.EditNote(CurrentProjectData.Notes[NoteId]);
-
-                if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
-                {
-                    CurrentProjectData.Notes[NoteId] = addAndEditNoteForm.CurrentNote;
-                    ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                    UpdateNotesList();
-                }
-            }
+            editNoteToolStripMenuItem_Click(sender, e);
         }
 
         private void RemoveNoteButton_Click(object sender, EventArgs e)
         {
-            if (NotesListBox.SelectedIndex != -1)
-            {
-                DialogResult result = MessageBox.Show("Do you want to remove note?", "NoteApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    CurrentProjectData.Notes.RemoveAt(NoteId);
-                    ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                    ClearFields();
-                    UpdateNotesList();
-                }
-            }
+            removeNoteToolStripMenuItem_Click(sender, e);
         }
 
         #endregion
@@ -167,19 +143,31 @@ namespace NoteAppUI
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            // Для сохранения список заметок должен быть не пустым
+            if (CurrentProjectData.Notes.Count != 0)
+            {
+                ProjectDataManager.SaveToFile(CurrentProjectData);
+                Application.Exit();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.AddNote();
-
-            if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
+            // Можно добавить только до 200 заметок
+            if (CurrentProjectData.Notes.Count < 200)
             {
-                CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
-                ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
-                UpdateNotesList();
+                AddAndEditNoteForm addEditNoteForm = new AddAndEditNoteForm();
+                addEditNoteForm.AddNote();
+
+                if (addEditNoteForm.ShowDialog() == DialogResult.OK)
+                {
+                    CurrentProjectData.Notes.Add(addEditNoteForm.CurrentNote);
+                    UpdateNotesList();
+                }
             }
         }
 
@@ -193,7 +181,6 @@ namespace NoteAppUI
                 if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
                 {
                     CurrentProjectData.Notes[NoteId] = addAndEditNoteForm.CurrentNote;
-                    ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
                     UpdateNotesList();
                 }
             }
@@ -201,14 +188,22 @@ namespace NoteAppUI
 
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Должна быть выбрана заметка.
             if (NotesListBox.SelectedIndex != -1)
             {
                 DialogResult result = MessageBox.Show("Do you want to remove note?", "NoteApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
                 if (result == DialogResult.Yes)
                 {
                     CurrentProjectData.Notes.RemoveAt(NoteId);
-                    ProjectDataManager.SaveToFile(CurrentProjectData, "ProjectData");
                     UpdateNotesList();
+
+                    this.DialogResult = DialogResult.Cancel;
+                }
+
+                if (result == DialogResult.No)
+                {
+                    this.DialogResult = DialogResult.Cancel;
                 }
             }
         }
@@ -216,6 +211,7 @@ namespace NoteAppUI
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form aboutForm = new AboutForm();
+
             aboutForm.ShowDialog();
         }
 
@@ -238,7 +234,6 @@ namespace NoteAppUI
 
         private void SetModifiedDateTime()
         {
-
             DateTime dateOfLastEdit = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
             DateTime dateOfCreation = CurrentProjectData.Notes[NoteId].DateOfCreation;
             if (dateOfCreation == dateOfLastEdit)
@@ -264,7 +259,17 @@ namespace NoteAppUI
                 // Для сохранения список заметок должен быть не пустым
                 if (CurrentProjectData.Notes.Count != 0)
                 {
-                    ProjectDataManager.SaveToFile(CurrentProjectData, "Project");
+                    if (NotesListBox.SelectedIndex != -1)
+                    {
+                        CurrentProjectData.CurrentNote = CurrentProjectData.Notes[NoteId];
+                    }
+
+                    if (NotesListBox.SelectedIndex == -1)
+                    {
+                        CurrentProjectData.CurrentNote = null;
+                    }
+
+                    ProjectDataManager.SaveToFile(CurrentProjectData);
                 }
             }
 

@@ -96,7 +96,7 @@
             // 
             this.CopyrightLabel.AutoSize = true;
             this.CopyrightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CopyrightLabel.Location = new System.Drawing.Point(15, 242);
+            this.CopyrightLabel.Location = new System.Drawing.Point(15, 265);
             this.CopyrightLabel.Name = "CopyrightLabel";
             this.CopyrightLabel.Size = new System.Drawing.Size(162, 17);
             this.CopyrightLabel.TabIndex = 5;
@@ -163,7 +163,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(478, 268);
+            this.ClientSize = new System.Drawing.Size(314, 291);
             this.Controls.Add(this.AuthorNameLabel);
             this.Controls.Add(this.GithubLinkLabel);
             this.Controls.Add(this.TgLinkLabel);

@@ -9,9 +9,6 @@ namespace NoteApp
     /// </summary>
     public class Note : ICloneable
     {
-        // Уникальный идентификатор записи.
-        //private readonly Guid _id = new Guid();
-
         private string _name;
 
         private string _content;
@@ -111,11 +108,10 @@ namespace NoteApp
             Category = category;
             DateOfLastEdit = DateTime.Now;
         }
-
         
-            // Категория преобразовывается в int, int преобразовывается в NoteCategory.
-            // При этом происходит создание нового объекта типа NoteCategory.
-            // return new Note(Name, Content, (NoteCategory)((int)Category));
+        // Категория преобразовывается в int, int преобразовывается в NoteCategory.
+        // При этом происходит создание нового объекта типа NoteCategory.
+        // return new Note(Name, Content, (NoteCategory)((int)Category));
 
         public object Clone()
         {

@@ -6,6 +6,7 @@ namespace NoteAppUI
 {
     public partial class AddAndEditNoteForm : Form
     {
+        // Состояние формы создания/редактирования.
         // Если true - форма открыта для редактирования записи.
         // Если false - форма открыта для добавления записи.
         private Boolean _isEdit;
@@ -56,9 +57,7 @@ namespace NoteAppUI
         {
             IsEdit = true;
             CurrentNote = currentNote;
-
             CurrentNote.DateOfLastEdit = DateTime.Now;
-
             //Заполнение данных
             TitleTextBox.Text = CurrentNote.Name;
             CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
