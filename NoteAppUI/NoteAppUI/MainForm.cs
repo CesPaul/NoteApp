@@ -49,9 +49,10 @@ namespace NoteAppUI
             // Подгрузка данных в ListBox.
             NotesListBox.DataSource = CurrentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";
-
-            // Чистим поля.
-            ClearFields();
+            if (NotesListBox.SelectedIndex == -1)
+            {
+                ClearFields();
+            }
         }
 
         // Обновление листа заметок.
@@ -160,12 +161,12 @@ namespace NoteAppUI
             // Можно добавить только до 200 заметок
             if (CurrentProjectData.Notes.Count < 200)
             {
-                AddAndEditNoteForm addEditNoteForm = new AddAndEditNoteForm();
-                addEditNoteForm.AddNote();
+                AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
+                addAndEditNoteForm.AddNote();
 
-                if (addEditNoteForm.ShowDialog() == DialogResult.OK)
+                if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
                 {
-                    CurrentProjectData.Notes.Add(addEditNoteForm.CurrentNote);
+                    CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
                     UpdateNotesList();
                 }
             }
@@ -196,6 +197,7 @@ namespace NoteAppUI
                 if (result == DialogResult.Yes)
                 {
                     CurrentProjectData.Notes.RemoveAt(NoteId);
+                    ClearFields();
                     UpdateNotesList();
 
                     this.DialogResult = DialogResult.Cancel;
@@ -226,7 +228,14 @@ namespace NoteAppUI
             {
                 NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
                 ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
-                CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
+                if (CurrentProjectData.Notes[NoteId].Category == NoteCategory.HealthAndSport)
+                {
+                    CategoryLabel.Text = "Health and Sport";
+                }
+                else
+                {
+                    CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
+                }
                 CreatedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfCreation.ToString();
                 SetModifiedDateTime();
             }

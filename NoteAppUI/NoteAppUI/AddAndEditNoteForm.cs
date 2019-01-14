@@ -65,7 +65,10 @@ namespace NoteAppUI
             SetModifiedDateTime(currentNote.DateOfLastEdit, currentNote.DateOfCreation);
             ContentTextBox.Text = CurrentNote.Content;
         }
-        
+
+        // Кнопки.
+        #region Buttons
+
         private void OkButton_Click(object sender, EventArgs e)
         {
             // Парсим с комбобокса выбранную пользователем категорию.
@@ -81,7 +84,7 @@ namespace NoteAppUI
             {
                 CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
             }
-            
+
             this.DialogResult = DialogResult.OK;
         }
 
@@ -96,6 +99,8 @@ namespace NoteAppUI
             }
         }
 
+        #endregion
+        
         /// <summary>
         /// Реализует скрытие даты редактирования у созданных заметок.
         /// </summary>
