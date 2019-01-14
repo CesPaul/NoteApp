@@ -39,11 +39,13 @@ namespace NoteApp
                 }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Name length is more than 50 symbols");
+                    _name = "Noname";
+                    return;
                 }
                 if (!Regex.IsMatch(value, pattern))
                 {
-                    throw new ArgumentException("Name value contains special symbols");
+                    _name = "Noname";
+                    return;
                 }
                  _name = value;
             }
@@ -108,10 +110,6 @@ namespace NoteApp
             Category = category;
             DateOfLastEdit = DateTime.Now;
         }
-        
-        // Категория преобразовывается в int, int преобразовывается в NoteCategory.
-        // При этом происходит создание нового объекта типа NoteCategory.
-        // return new Note(Name, Content, (NoteCategory)((int)Category));
 
         public object Clone()
         {

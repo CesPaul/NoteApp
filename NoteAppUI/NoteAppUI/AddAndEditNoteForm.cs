@@ -31,7 +31,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
 
-            // Устанавливаем всплывающие подсказки
+            // Устанавливаем всплывающие подсказки.
             OkButtonToolTip.SetToolTip(OkButton, "Save changes to current note");
             CancelButtonToolTip.SetToolTip(CancelButton, "Exit without saving");
         }
@@ -42,8 +42,10 @@ namespace NoteAppUI
         public void AddNote()
         {
             IsEdit = false;
+
             TitleTextBox.Text = "Noname";
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+            FillCategoryItems();
+            CategoryComboBox.SelectedIndex = 0;
             DateTime dateTimeNow = DateTime.Now;
             CreatedDateTimeLabel.Text = dateTimeNow.ToString();
             SetModifiedDateTime(dateTimeNow, dateTimeNow);
@@ -56,14 +58,38 @@ namespace NoteAppUI
         public void EditNote(Note currentNote)
         {
             IsEdit = true;
+
             CurrentNote = currentNote;
-            CurrentNote.DateOfLastEdit = DateTime.Now;
-            //Заполнение данных
+            // Заполнение данных.
             TitleTextBox.Text = CurrentNote.Name;
-            CategoryComboBox.DataSource = Enum.GetValues(typeof(NoteCategory));
+            FillCategoryItems();
+            // Особый случай с категорией.
+            if (CurrentNote.Category == NoteCategory.HealthAndSport)
+            {
+                CategoryComboBox.Text = "Health and Sport";
+            }
+            else
+            {
+                CategoryComboBox.Text = CurrentNote.Category.ToString();
+            }
+            CurrentNote.DateOfLastEdit = DateTime.Now;
             CreatedDateTimeLabel.Text = CurrentNote.DateOfCreation.ToString();
             SetModifiedDateTime(currentNote.DateOfLastEdit, currentNote.DateOfCreation);
             ContentTextBox.Text = CurrentNote.Content;
+        }
+
+        /// <summary>
+        /// Заполняет категории заметки
+        /// </summary>
+        public void FillCategoryItems()
+        {
+            CategoryComboBox.Items.Add(NoteCategory.Other.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Documents.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Finance.ToString());
+            CategoryComboBox.Items.Add("Health and Sport");
+            CategoryComboBox.Items.Add(NoteCategory.Home.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.People.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Work.ToString());
         }
 
         // Кнопки.
@@ -71,21 +97,20 @@ namespace NoteAppUI
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            // Парсим с комбобокса выбранную пользователем категорию.
-            // Если не спарсил - то поставит дефолтное значение NoteCategory.
-            Enum.TryParse<NoteCategory>(CategoryComboBox.SelectedValue.ToString(), out CurrentCategory);
             if (IsEdit)
             {
+                CurrentCategory = (NoteCategory)CategoryComboBox.SelectedIndex;
                 var CurrentCreationDateTime = CurrentNote.DateOfCreation;
                 CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
                 CurrentNote.DateOfCreation = CurrentCreationDateTime;
             }
             else
             {
+                CurrentCategory = (NoteCategory)CategoryComboBox.SelectedIndex;
                 CurrentNote = new Note(TitleTextBox.Text, ContentTextBox.Text, CurrentCategory);
             }
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
