@@ -29,30 +29,27 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
-
-            CategoryComboBox.Items.Add("All");
-
-            foreach (NoteCategory element in Enum.GetValues(typeof(NoteCategory)))
-            {
-                CategoryComboBox.Items.Add(element);
-            }
-
-            CategoryComboBox.SelectedIndex = 0;
-
+            FillCategoryItems();
             // Задаем клавишу быстрого доступа для удаления
             removeNoteToolStripMenuItem.ShortcutKeys = Keys.Delete;
 
             // Пытаемся загрузить данные из файла. Если нет - создаём новый файл.
-
             CurrentProjectData = ProjectDataManager.LoadFromFile();
 
             // Подгрузка данных в ListBox.
             NotesListBox.DataSource = CurrentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";
-            if (NotesListBox.SelectedIndex == -1)
-            {
-                ClearFields();
-            }
+
+            // Счётчик заметок.
+            CountNotesLabel.Text = NotesListBox.Items.Count.ToString();
+            // Снятие выделения заметки.
+            NotesListBox.SelectedIndex = -1;
+            CategoryComboBox.SelectedIndex = 0;
+            ClearFields();
+
+            // Защита кнопок от нажатия при невыбранной заметке.
+            EditNoteButton.Enabled = false;
+            RemoveNoteButton.Enabled = false;
         }
 
         // Обновление листа заметок.
@@ -67,6 +64,24 @@ namespace NoteAppUI
             // Обновляем данные коллекции
             NotesListBox.DataSource = CurrentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";
+
+            // Обновление счётчика заметок.
+            CountNotesLabel.Text = NotesListBox.Items.Count.ToString();
+        }
+
+        /// <summary>
+        /// Заполняет категории заметки
+        /// </summary>
+        public void FillCategoryItems()
+        {
+            CategoryComboBox.Items.Add("All");
+            CategoryComboBox.Items.Add(NoteCategory.Other.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Documents.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Finance.ToString());
+            CategoryComboBox.Items.Add("Health and Sport");
+            CategoryComboBox.Items.Add(NoteCategory.Home.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.People.ToString());
+            CategoryComboBox.Items.Add(NoteCategory.Work.ToString());
         }
 
         /*private void UpdateNotesList(NoteCategory category)
@@ -168,6 +183,9 @@ namespace NoteAppUI
                 {
                     CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
                     UpdateNotesList();
+
+                    // Выбор только что созданной заметки.
+                    NotesListBox.SelectedIndex = NotesListBox.Items.Count - 1;
                 }
             }
         }
@@ -192,6 +210,10 @@ namespace NoteAppUI
             //Должна быть выбрана заметка.
             if (NotesListBox.SelectedIndex != -1)
             {
+                // При выборе заметки кнопки становятся доступны.
+                EditNoteButton.Enabled = true;
+                RemoveNoteButton.Enabled = true;
+
                 DialogResult result = MessageBox.Show("Do you want to remove note?", "NoteApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
@@ -199,14 +221,24 @@ namespace NoteAppUI
                     CurrentProjectData.Notes.RemoveAt(NoteId);
                     ClearFields();
                     UpdateNotesList();
-
-                    this.DialogResult = DialogResult.Cancel;
+                    NotesListBox.SelectedIndex = NotesListBox.Items.Count - 1;
+                    
+                    DialogResult = DialogResult.Cancel;
                 }
 
                 if (result == DialogResult.No)
                 {
-                    this.DialogResult = DialogResult.Cancel;
+                    DialogResult = DialogResult.Cancel;
                 }
+            }
+
+            // Блокировка кнопок после удаления заметки если нет выбранной заметки.
+            if (NotesListBox.SelectedIndex == -1)
+            {
+                ClearFields();
+
+                EditNoteButton.Enabled = false;
+                RemoveNoteButton.Enabled = false;
             }
         }
 
@@ -226,6 +258,10 @@ namespace NoteAppUI
 
             if (NoteId != -1)
             {
+                // При выборе заметки кнопки доступны.
+                EditNoteButton.Enabled = true;
+                RemoveNoteButton.Enabled = true;
+
                 NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
                 ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
                 if (CurrentProjectData.Notes[NoteId].Category == NoteCategory.HealthAndSport)

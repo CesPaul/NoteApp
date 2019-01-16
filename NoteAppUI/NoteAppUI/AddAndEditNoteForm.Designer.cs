@@ -102,9 +102,9 @@ namespace NoteAppUI
             // ContentTextBox
             // 
             this.ContentTextBox.Location = new System.Drawing.Point(15, 85);
-            this.ContentTextBox.MaxLength = 500;
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
+            this.ContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ContentTextBox.Size = new System.Drawing.Size(465, 428);
             this.ContentTextBox.TabIndex = 8;
             // 

@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.NoteAppLabel = new System.Windows.Forms.Label();
-            this.VersionLabel = new System.Windows.Forms.Label();
             this.AuthorLabel = new System.Windows.Forms.Label();
             this.EmailLabel = new System.Windows.Forms.Label();
             this.GithubLabel = new System.Windows.Forms.Label();
@@ -51,16 +50,6 @@
             this.NoteAppLabel.Size = new System.Drawing.Size(127, 31);
             this.NoteAppLabel.TabIndex = 0;
             this.NoteAppLabel.Text = "NoteApp";
-            // 
-            // VersionLabel
-            // 
-            this.VersionLabel.AutoSize = true;
-            this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.VersionLabel.Location = new System.Drawing.Point(134, 16);
-            this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(60, 24);
-            this.VersionLabel.TabIndex = 1;
-            this.VersionLabel.Text = "v. 0.1";
             // 
             // AuthorLabel
             // 
@@ -98,9 +87,9 @@
             this.CopyrightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CopyrightLabel.Location = new System.Drawing.Point(15, 265);
             this.CopyrightLabel.Name = "CopyrightLabel";
-            this.CopyrightLabel.Size = new System.Drawing.Size(162, 17);
+            this.CopyrightLabel.Size = new System.Drawing.Size(199, 17);
             this.CopyrightLabel.TabIndex = 5;
-            this.CopyrightLabel.Text = "2018 Pavel Gumennikov";
+            this.CopyrightLabel.Text = "2018-2019 Pavel Gumennikov";
             // 
             // TgLabel
             // 
@@ -173,7 +162,6 @@
             this.Controls.Add(this.GithubLabel);
             this.Controls.Add(this.EmailLabel);
             this.Controls.Add(this.AuthorLabel);
-            this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.NoteAppLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -189,7 +177,6 @@
         #endregion
 
         private System.Windows.Forms.Label NoteAppLabel;
-        private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Label AuthorLabel;
         private System.Windows.Forms.Label EmailLabel;
         private System.Windows.Forms.Label GithubLabel;
