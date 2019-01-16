@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -83,46 +82,6 @@ namespace NoteAppUI
             CategoryComboBox.Items.Add(NoteCategory.People.ToString());
             CategoryComboBox.Items.Add(NoteCategory.Work.ToString());
         }
-
-        /*private void UpdateNotesList(NoteCategory category)
-        {
-            // Сохраняемся всякий раз, когда обновляем данные
-            ProjectDataManager.SaveToFile(CurrentProjectData);
-
-            // Перезагружаем проект
-            CurrentProjectData = ProjectDataManager.LoadFromFile();
-
-            // Если нет заметок - ничего не делаем
-            try
-            {
-                CurrentProjectData.SortNotesCollection();
-            }
-            catch (InvalidOperationException)
-            {
-
-            }
-
-            // Обновляем данные коллекции
-            NotesListBox.DataSource = null;
-
-            // Если пришёл пустой список - ничего не делаем
-            try
-            {
-                FilteredList = CurrentProjectData.SortNotesCollection(category);
-                NotesListBox.DataSource = FilteredList;
-            }
-            catch (InvalidOperationException)
-            {
-            }
-
-            NotesListBox.DisplayMember = "Name";
-
-            //// Снимаем выделение
-            //if (NotesListBox.Items.Count != 0)
-            //{
-            //    NotesListBox.SelectedIndex = -1;
-            //}
-        }*/
 
         // Очистка полей.
         private void ClearFields()
