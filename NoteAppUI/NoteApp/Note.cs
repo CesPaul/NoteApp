@@ -32,6 +32,7 @@ namespace NoteApp
                 }
 
                 value = value.Trim();
+
                 if (value.Length == 0)
                 {
                     _name = "Noname";
@@ -94,20 +95,6 @@ namespace NoteApp
             Content = content;
             Category = category;
             DateOfCreation = DateTime.Now;
-            DateOfLastEdit = DateTime.Now;
-        }
-
-        /// <summary>
-        /// Метод для редактирования заметки.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="content"></param>
-        /// <param name="category"></param>
-        public void Edit(string name, string content, NoteCategory category)
-        {
-            Name = name;
-            Content = content;
-            Category = category;
             DateOfLastEdit = DateTime.Now;
         }
 
