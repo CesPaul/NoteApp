@@ -12,6 +12,7 @@ namespace NoteAppUI
         /// </summary>
         private int _noteId;
         public int NoteId { get; set; }
+
         /// <summary>
         /// Хранит экземпляр текущего проекта.
         /// </summary>
@@ -25,11 +26,6 @@ namespace NoteAppUI
             get { return _currentProjectData; }
             set { _currentProjectData = value; }
         }
-
-        /// <summary>
-        /// Хранит список отфильтрованный по категории
-        /// </summary>
-        public List<Note> FilteredList { get; set; }
 
         public MainForm()
         {
@@ -62,27 +58,41 @@ namespace NoteAppUI
             // Перезагружаем проект.
             _currentProjectData = ProjectDataManager.LoadFromFile();
 
-            _currentProjectData.Notes = _currentProjectData.OrderListByEditDate();
-
             // Обновляем данные коллекции.
             NotesListBox.DataSource = null;
-            NotesListBox.DataSource = _currentProjectData.Notes;
             NotesListBox.DisplayMember = "Name";
-
+            NoteId = NotesListBox.SelectedIndex;
             if (CategoryComboBox.SelectedIndex == 0)
             {
-                NotesListBox.DataSource = _currentProjectData.OrderListByEditDate();
+                NotesListBox.DataSource = CurrentProjectData.Notes;
             }
             else if (CategoryComboBox.SelectedIndex >= 1)
             {
                 NotesListBox.DataSource = _currentProjectData.OrderListByEditDate((NoteCategory)CategoryComboBox.SelectedIndex - 1);
             }
 
-            NoteId = NotesListBox.SelectedIndex;
+            if (CategoryComboBox.SelectedIndex != 0)
+            {
+                EditNoteButton.Enabled = false;
+            }
+
+            if (NotesListBox.Items.Count != 0)
+            {
+                NotesListBox.SelectedIndex = 0;
+            }
+
+            // Снятие выделения заметки.
+            NotesListBox.SelectedIndex = -1;
+
+            // Защита кнопок от нажатия при невыбранной заметке.
+            EditNoteButton.Enabled = false;
+            RemoveNoteButton.Enabled = false;
 
             // Обновление счётчика заметок.
             CountNotesLabel.Text = NotesListBox.Items.Count.ToString();
         }
+
+        
 
         /// <summary>
         /// Заполняет категории заметки
@@ -107,51 +117,6 @@ namespace NoteAppUI
             CreatedDateTimeLabel.Text = "";
             ModifiedDateTimeLabel.Text = "";
             ContentTextBox.Text = "";
-        }
-
-        public void SetAllFieldsOfCurrentNote()
-        {
-            if (FilteredList == null)
-            {
-                // Меняем название заметки
-                NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
-
-                // Особый случай с категориями
-                if (CurrentProjectData.Notes[NoteId].Category == NoteCategory.HealthAndSport)
-                {
-                    CategoryLabel.Text = "Health and Sport";
-                }
-                else
-                {
-                    CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
-                }
-
-                // Меняем все остальные поля
-                /*CreatedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfCreation.ToString();
-                ModifiedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfLastEdit.ToString();*/
-                SetModifiedDateTime();
-                ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
-            }
-            else
-            {
-                // Меняем название заметки
-                NoteNameLabel.Text = FilteredList[NoteId].Name;
-
-                // Особый случай с категориями
-                if (FilteredList[NoteId].Category == NoteCategory.HealthAndSport)
-                {
-                    CategoryLabel.Text = "Health and Sport";
-                }
-                else
-                {
-                    CategoryLabel.Text = FilteredList[NoteId].Category.ToString();
-                }
-
-                // Меняем все остальные поля
-                CreatedDateTimeLabel.Text = FilteredList[NoteId].DateOfCreation.ToString();
-                ModifiedDateTimeLabel.Text = FilteredList[NoteId].DateOfLastEdit.ToString();
-                ContentTextBox.Text = FilteredList[NoteId].Content;
-            }
         }
 
         // События кнопок.
@@ -203,24 +168,27 @@ namespace NoteAppUI
                 {
                     CurrentProjectData.Notes.Add(addAndEditNoteForm.CurrentNote);
                     UpdateNotesList();
-
-                    // Выбор только что созданной заметки.
-                    NotesListBox.SelectedIndex = 0;
                 }
             }
         }
 
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            NoteId = NotesListBox.SelectedIndex;
             if (NotesListBox.SelectedIndex != -1)
             {
                 AddAndEditNoteForm addAndEditNoteForm = new AddAndEditNoteForm();
                 addAndEditNoteForm.EditNote(CurrentProjectData.Notes[NoteId]);
-
+                
                 if (addAndEditNoteForm.ShowDialog() == DialogResult.OK)
                 {
-                    CurrentProjectData.Notes[NoteId] = addAndEditNoteForm.CurrentNote;
-                    UpdateNotesList();
+                    // TODO: Сделать редактирование заметки при сортировке.
+                    // Проблема: после сортировки не совпадают индексы заметок!
+                    if (CategoryComboBox.SelectedIndex == 0)
+                    {
+                        CurrentProjectData.Notes[NoteId] = addAndEditNoteForm.CurrentNote;
+                        UpdateNotesList();
+                    }
                 }
             }
         }
@@ -238,10 +206,9 @@ namespace NoteAppUI
 
                 if (result == DialogResult.Yes)
                 {
-                    CurrentProjectData.Notes.RemoveAt(NoteId);
+                    CurrentProjectData.Notes.Remove((Note)NotesListBox.SelectedItem);
                     ClearFields();
                     UpdateNotesList();
-                    NotesListBox.SelectedIndex = 0;
                     
                     DialogResult = DialogResult.Cancel;
                 }
@@ -274,43 +241,50 @@ namespace NoteAppUI
         // Событие при смене выбора заметки.
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CategoryComboBox.SelectedIndex >= 0)
+            var NoteId = NotesListBox.SelectedIndex;
+            if (NoteId != -1)
             {
-                NoteId = NotesListBox.SelectedIndex;
-                if (NoteId != -1)
+                // При выборе заметки кнопки доступны.
+                EditNoteButton.Enabled = true;
+                RemoveNoteButton.Enabled = true;
+                if (CategoryComboBox.SelectedIndex > 0)
                 {
-                    // При выборе заметки кнопки доступны.
-                    EditNoteButton.Enabled = true;
-                    RemoveNoteButton.Enabled = true;
-
-                    NoteNameLabel.Text = CurrentProjectData.Notes[NoteId].Name;
-                    ContentTextBox.Text = CurrentProjectData.Notes[NoteId].Content;
-                    if (CurrentProjectData.Notes[NoteId].Category == NoteCategory.HealthAndSport)
-                    {
-                        CategoryLabel.Text = "Health and Sport";
-                    }
-                    else
-                    {
-                        CategoryLabel.Text = CurrentProjectData.Notes[NoteId].Category.ToString();
-                    }
-                    CreatedDateTimeLabel.Text = CurrentProjectData.Notes[NoteId].DateOfCreation.ToString();
-                    SetModifiedDateTime();
+                    EditNoteButton.Enabled = false;
+                }
+                var note = (Note) NotesListBox.SelectedItem;
+                NoteNameLabel.Text = note.Name;
+                ContentTextBox.Text = note.Content;
+                if (note.Category == NoteCategory.HealthAndSport)
+                {
+                    CategoryLabel.Text = "Health and Sport";
                 }
                 else
                 {
-                    ClearFields();
+                    CategoryLabel.Text = note.Category.ToString();
                 }
+                CreatedDateTimeLabel.Text = note.DateOfCreation.ToString();
+                SetModifiedDateTime();
             }
-            else if (CategoryComboBox.SelectedIndex >= 1)
+            else
             {
-                
+                ClearFields();
             }
+        }
+
+        // TODO: Пофиксить сортировку заметок по категориям.
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateNotesList();
+            NotesListBox.SelectedIndex = -1;
+            ClearFields();
         }
 
         private void SetModifiedDateTime()
         {
-            DateTime dateOfLastEdit = CurrentProjectData.Notes[NoteId].DateOfLastEdit;
-            DateTime dateOfCreation = CurrentProjectData.Notes[NoteId].DateOfCreation;
+            var note = (Note)NotesListBox.SelectedItem;
+            DateTime dateOfLastEdit = note.DateOfLastEdit;
+            DateTime dateOfCreation = note.DateOfCreation;
+
             if (dateOfCreation == dateOfLastEdit)
             {
                 ModifiedDateTimeLabel.Visible = false;
@@ -331,6 +305,7 @@ namespace NoteAppUI
             DialogResult result = MessageBox.Show("Do you want to exit?", "NoteApp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                NoteId = NotesListBox.SelectedIndex;
                 // Для сохранения список заметок должен быть не пустым
                 if (CurrentProjectData.Notes.Count != 0)
                 {
@@ -352,14 +327,6 @@ namespace NoteAppUI
             {
                 e.Cancel = true;
             }
-        }
-
-        // TODO: Пофиксить сортировку заметок по категориям.
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateNotesList();
-            NotesListBox.SelectedIndex = -1;
-            ClearFields();
         }
     }
 }
