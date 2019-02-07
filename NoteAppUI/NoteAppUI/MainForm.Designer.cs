@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.QuantityNotesLabel = new System.Windows.Forms.Label();
-            this.CountNotesLabel = new System.Windows.Forms.Label();
             this.RemoveNoteButton = new System.Windows.Forms.Button();
             this.EditNoteButton = new System.Windows.Forms.Button();
             this.AddNoteButton = new System.Windows.Forms.Button();
@@ -71,8 +69,6 @@
             // 
             // MainSplitContainer.Panel1
             // 
-            this.MainSplitContainer.Panel1.Controls.Add(this.QuantityNotesLabel);
-            this.MainSplitContainer.Panel1.Controls.Add(this.CountNotesLabel);
             this.MainSplitContainer.Panel1.Controls.Add(this.RemoveNoteButton);
             this.MainSplitContainer.Panel1.Controls.Add(this.EditNoteButton);
             this.MainSplitContainer.Panel1.Controls.Add(this.AddNoteButton);
@@ -93,26 +89,6 @@
             this.MainSplitContainer.Size = new System.Drawing.Size(700, 518);
             this.MainSplitContainer.SplitterDistance = 262;
             this.MainSplitContainer.TabIndex = 1;
-            // 
-            // QuantityNotesLabel
-            // 
-            this.QuantityNotesLabel.AutoSize = true;
-            this.QuantityNotesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.QuantityNotesLabel.Location = new System.Drawing.Point(111, 485);
-            this.QuantityNotesLabel.Name = "QuantityNotesLabel";
-            this.QuantityNotesLabel.Size = new System.Drawing.Size(102, 15);
-            this.QuantityNotesLabel.TabIndex = 7;
-            this.QuantityNotesLabel.Text = "Кол-во заметок:";
-            // 
-            // CountNotesLabel
-            // 
-            this.CountNotesLabel.AutoSize = true;
-            this.CountNotesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CountNotesLabel.Location = new System.Drawing.Point(210, 485);
-            this.CountNotesLabel.Name = "CountNotesLabel";
-            this.CountNotesLabel.Size = new System.Drawing.Size(33, 15);
-            this.CountNotesLabel.TabIndex = 6;
-            this.CountNotesLabel.Text = "Sum";
             // 
             // RemoveNoteButton
             // 
@@ -386,8 +362,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.MenuStrip MainMenu;
-        private System.Windows.Forms.Label CountNotesLabel;
-        private System.Windows.Forms.Label QuantityNotesLabel;
     }
 }
 

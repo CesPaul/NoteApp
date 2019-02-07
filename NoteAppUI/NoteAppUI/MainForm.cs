@@ -87,9 +87,6 @@ namespace NoteAppUI
             // Защита кнопок от нажатия при невыбранной заметке.
             EditNoteButton.Enabled = false;
             RemoveNoteButton.Enabled = false;
-
-            // Обновление счётчика заметок.
-            CountNotesLabel.Text = NotesListBox.Items.Count.ToString();
         }
 
         
@@ -263,7 +260,7 @@ namespace NoteAppUI
                     CategoryLabel.Text = note.Category.ToString();
                 }
                 CreatedDateTimeLabel.Text = note.DateOfCreation.ToString();
-                SetModifiedDateTime();
+                ModifiedDateTimeLabel.Text = note.DateOfLastEdit.ToString();
             }
             else
             {
@@ -277,26 +274,6 @@ namespace NoteAppUI
             UpdateNotesList();
             NotesListBox.SelectedIndex = -1;
             ClearFields();
-        }
-
-        private void SetModifiedDateTime()
-        {
-            var note = (Note)NotesListBox.SelectedItem;
-            DateTime dateOfLastEdit = note.DateOfLastEdit;
-            DateTime dateOfCreation = note.DateOfCreation;
-
-            if (dateOfCreation == dateOfLastEdit)
-            {
-                ModifiedDateTimeLabel.Visible = false;
-                ModifiedLabel.Visible = false;
-            }
-            else
-            {
-                ModifiedDateTimeLabel.Visible = true;
-                ModifiedLabel.Visible = true;
-            }
-
-            ModifiedDateTimeLabel.Text = dateOfLastEdit.ToString();
         }
 
         // Обработчик при закрытии окна программы.
